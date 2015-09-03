@@ -88,4 +88,9 @@ function wkhtmltopdf(input, options, callback) {
 }
 
 wkhtmltopdf.command = 'wkhtmltopdf';
+if (process.platform === 'linux' && process.arch === 'x64') {
+  var path = require('path');
+  wkhtmltopdf.command = path.join(__dirname, 'wkhtmltopdf-amd64');
+}
+
 module.exports = wkhtmltopdf;
