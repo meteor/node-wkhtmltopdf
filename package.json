@@ -1,6 +1,6 @@
 {
   "name": "wkhtmltopdf-selfcontained",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A wrapper for the wkhtmltopdf HTML to PDF converter using WebKit, with Linux binary included",
   "author": {
     "name": "David Glasser",

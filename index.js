@@ -76,7 +76,16 @@ function wkhtmltopdf(input, options, callback) {
   
   child.once('error', handleError);
   child.stderr.once('data', function(err) {
-    handleError(new Error((err || '').toString().trim()));
+    err = (err || '').toString();
+    // Sometimes wkhtmltopdf prints out this warning, which just means that
+    // SSLv2 was not available. This in and of itself is not a fatal error and
+    // should be ignored.
+    err = err.replace(
+        /QSslSocket: cannot resolve SSLv2_(?:client|server)_method/g, '');
+    err = err.trim();
+    if (err) {
+      handleError(new Error(err));
+    }
   });
   
   // write input to stdin if it isn't a url
